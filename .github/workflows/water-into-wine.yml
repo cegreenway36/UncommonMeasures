@@ -1,0 +1,27 @@
+
+name: Calculate Water into Wine
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  calculate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get repository files
+        uses: actions/checkout@v4
+
+      - name: Run Water into Wine calculation
+        run: python3 water_into_wine.py
+
+      - name: Save results for download
+        uses: actions/upload-artifact@v4
+        with:
+          name: water-into-wine-results
+          path: data/*.csv
+          if-no-files-found: error
+          retention-days: 30
