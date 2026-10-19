@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Water into Wine: how UK water prices have changed relative to wine prices, using official ONS CPI data.">
+  <title>Water into Wine | Uncommon Measures</title>
+  <style>
+    :root{color-scheme:light;--ink:#172c2b;--muted:#65736e;--bg:#faf9f5;--line:#dce2db;--accent:#25796e}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+    .wrap{max-width:930px;margin:auto;padding:24px 24px 70px}
+    header{display:flex;justify-content:space-between;align-items:center;padding:10px 0 25px;border-bottom:1px solid var(--line);gap:12px}
+    .brand{font-size:.91rem;letter-spacing:.16em;font-weight:800}.issue{color:var(--muted);font-size:.81rem}
+    main{padding-top:48px}.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.76rem;font-weight:750;color:var(--accent)}
+    h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(2.8rem,7vw,5.2rem);line-height:1.04;letter-spacing:-.04em;margin:15px 0 15px}
+    .dek{font-size:1.14rem;color:var(--muted);max-width:650px;margin:0 0 34px}
+    .metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:32px}
+    .metric{padding:20px;border:1px solid var(--line);border-radius:8px;background:#fff;min-width:0}
+    .metric span{display:block;color:var(--muted);font-size:.83rem}.metric strong{display:block;font-size:clamp(1.35rem,3.3vw,2.15rem);line-height:1.2;margin:11px 0 4px;font-variant-numeric:tabular-nums}
+    .metric small{color:var(--muted)}
+    .panel{background:#fff;border:1px solid var(--line);border-radius:8px;padding:22px;margin:26px 0}
+    .panel-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:12px}
+    h2{font-size:1.1rem;margin:0}.subtitle{color:var(--muted);font-size:.82rem}
+    svg{width:100%;height:auto;display:block;overflow:visible}.axis-label{fill:#77827c;font-size:12px}.gridline{stroke:#e6ebe5;stroke-width:1}
+    .series{stroke:var(--accent);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .legend{display:flex;gap:15px;color:var(--muted);font-size:.81rem;margin-top:9px;align-items:center}
+    .swatch{display:inline-block;width:18px;height:3px;background:var(--accent);vertical-align:middle;margin-right:6px}
+    .prose{max-width:760px}.prose p{margin:12px 0;color:#354a45}a{color:var(--accent)}a:hover{text-decoration-thickness:2px}
+    .status{background:#fff6e6;border:1px solid #d9bc80;padding:14px;border-radius:6px;color:#775319;margin:22px 0}
+    footer{border-top:1px solid var(--line);margin-top:45px;padding-top:21px;color:var(--muted);font-size:.78rem}
+    @media(max-width:620px){.wrap{padding:16px 16px 55px}main{padding-top:30px}.metrics{grid-template-columns:1fr}.metric{padding:15px}.metric strong{margin:5px 0}.panel{padding:13px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><div class="brand">UNCOMMON MEASURES</div><div class="issue">Index 001 · United Kingdom</div></header>
+    <main>
+      <div class="eyebrow">Alternative economic indicators</div>
+      <h1>Water into Wine</h1>
+      <p class="dek">The price of an essential, measured against an indulgence. How has UK water supply inflation compared with wine inflation?</p>
+      <div id="status" class="status" role="status">Loading published index data…</div>
+      <section class="metrics" aria-label="Latest index statistics">
+        <div class="metric"><span>Relative-price index</span><strong id="latest">—</strong><small>January 2015 = 100</small></div>
+        <div class="metric"><span>Change over 12 months</span><strong id="annual">—</strong><small>Relative water/wine price change</small></div>
+        <div class="metric"><span>Since January 2015</span><strong id="cumulative">—</strong><small>Cumulative relative change</small></div>
+      </section>
+      <section class="panel" aria-labelledby="chart-title">
+        <div class="panel-head"><h2 id="chart-title">Water into Wine index</h2><span class="subtitle" id="period">Monthly observations</span></div>
+        <svg id="chart" viewBox="0 0 820 340" role="img" aria-label="Line chart showing the UK Water into Wine relative-price index over time"></svg>
+        <div class="legend"><span><i class="swatch"></i> Water supply CPI ÷ wine CPI, rebased to January 2015</span></div>
+      </section>
+      <div class="prose">
+        <h2>What does the number mean?</h2>
+        <p>An index of 120 means UK water supply prices have risen <strong>20% relative to wine prices</strong> since January 2015. An index of 80 means they have fallen 20% relative to wine. It does not measure the cost of a litre of either product.</p>
+        <h2>Methodology and sources</h2>
+        <p>Calculated as 100 × (water CPI ÷ wine CPI) ÷ (the same ratio in January 2015), using monthly ONS CPI indices for <a href="https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7dr/mm23">water supply (D7DR)</a> and <a href="https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7dh/mm23">wine (D7DH)</a>. The latest data month shown below is the latest observation in the published CSV, not necessarily the newest ONS release.</p>
+        <p><a href="history.csv" download>Download all published observations (CSV)</a></p>
+        <p class="subtitle" id="updated">Data month: —</p>
+      </div>
+    </main>
+    <footer>Uncommon Measures · Public-data analysis · This index is an original calculation, not an official ONS index.</footer>
+  </div>
+  <script>
+    "use strict";
+    const byId = id => document.getElementById(id);
+    const svgNS = "http://www.w3.org/2000/svg";
+    const svgNode = (tag, attrs, text) => {
+      const e = document.createElementNS(svgNS, tag);
+      Object.entries(attrs).forEach(([key, value]) => e.setAttribute(key, String(value)));
+      if (text !== undefined) e.textContent = text;
+      return e;
+    };
+    function parseCsv(csv) {
+      // Expected output of water_into_wine.py: fixed columns, numeric observations, no quoted fields.
+      const lines = csv.trim().split(/\r?\n/);
+      if (lines.shift().trim() !== "month,water_cpi,wine_cpi,index") throw Error("Unexpected CSV columns");
+      const rows = lines.map((line) => {
+        const cols = line.trim().split(",");
+        if (cols.length !== 4 || !/^\d{4}-(0[1-9]|1[0-2])$/.test(cols[0])) throw Error("Invalid monthly record");
+        const values = cols.slice(1).map(Number);
+        if (values.some(value => !Number.isFinite(value) || value <= 0)) throw Error("Invalid index value");
+        return {month: cols[0], water: values[0], wine: values[1], index: values[2]};
+      });
+      if (rows.length < 13 || rows[0].month !== "2015-01" || Math.abs(rows[0].index - 100) > .001) throw Error("Invalid base period");
+      for (let i = 1; i < rows.length; i++) {
+        const [year, month] = rows[i-1].month.split("-").map(Number);
+        const expected = `${year + (month === 12)}-${String(month % 12 + 1).padStart(2, "0")}`;
+        if (rows[i].month !== expected) throw Error("Data contains a duplicate or missing month");
+      }
+      return rows;
+    }
+    function draw(rows) {
+      const svg = byId("chart");
+      svg.replaceChildren();
+      const W=820,H=340,L=55,R=18,T=16,B=45;
+      const minValue=Math.min(...rows.map(r=>r.index),100);
+      const maxValue=Math.max(...rows.map(r=>r.index),100);
+      const padding=Math.max((maxValue-minValue)*.12,3);
+      const min=minValue-padding,max=maxValue+padding;
+      const x=i=>L+(W-L-R)*i/(rows.length-1);
+      const y=v=>T+(H-T-B)*(max-v)/(max-min);
+      for(let j=0;j<=4;j++){
+        const v=min+(max-min)*j/4, yy=y(v);
+        svg.append(svgNode("line",{x1:L,y1:yy,x2:W-R,y2:yy,class:"gridline"}));
+        svg.append(svgNode("text",{x:7,y:yy+4,class:"axis-label"},v.toFixed(0)));
+      }
+      const labels=[0,Math.floor((rows.length-1)/4),Math.floor((rows.length-1)/2),Math.floor(3*(rows.length-1)/4),rows.length-1];
+      [...new Set(labels)].forEach(i=>svg.append(svgNode("text",{x:x(i),y:H-12,"text-anchor":i===0?"start":i===rows.length-1?"end":"middle",class:"axis-label"},rows[i].month.slice(0,4))));
+      svg.append(svgNode("line",{x1:L,y1:y(100),x2:W-R,y2:y(100),stroke:"#98a7a0","stroke-dasharray":"5 5","stroke-width":1}));
+      svg.append(svgNode("path",{d:rows.map((r,i)=>`${i===0?"M":"L"}${x(i).toFixed(2)} ${y(r.index).toFixed(2)}`).join(" "),class:"series"}));
+      const last=rows[rows.length-1];
+      svg.append(svgNode("circle",{cx:x(rows.length-1),cy:y(last.index),r:4.5,fill:"#25796e"}));
+    }
+    async function load() {
+      try {
+        const response=await fetch(`history.csv?v=${Date.now()}`,{cache:"no-store"});
+        if(!response.ok) throw Error(`Could not load history.csv (HTTP ${response.status})`);
+        const rows=parseCsv(await response.text());
+        const last=rows[rows.length-1];
+        const prev=rows[rows.length-13];
+        const percent=v=>(v>=0?"+":"")+v.toFixed(1)+"%";
+        byId("latest").textContent=last.index.toFixed(1);
+        byId("annual").textContent=percent(100*(last.index/prev.index-1));
+        byId("cumulative").textContent=percent(last.index-100);
+        byId("period").textContent=`January 2015 – ${last.month}`;
+        byId("updated").textContent=`Latest published observation: ${last.month}`;
+        draw(rows);
+        byId("status").hidden=true;
+      } catch(err) {
+        byId("status").textContent="Index data could not be displayed: "+err.message+". Confirm that history.csv is in the same docs folder as index.html.";
+      }
+    }
+    load();
+  </script>
+</body>
+</html>
